@@ -20,3 +20,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/APIGetCoffeeDB','CoffeeController@getCoffeeDB');//getting coffee from database and returning json to Coffeecollection vue

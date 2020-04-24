@@ -7,6 +7,7 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
+        <link href="css/app.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
@@ -64,7 +65,9 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div id="app">
+            <Root />
+        {{-- <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -78,6 +81,7 @@
                     @endauth
                 </div>
             @endif
+
 
             <div class="content">
                 <div class="title m-b-md">
@@ -95,6 +99,8 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
+    </div>
+    <script src="js/app.js"></script>
     </body>
 </html>
