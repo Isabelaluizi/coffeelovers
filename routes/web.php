@@ -20,4 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/APIconfirmLogin','UserController@confirmLogin');//API to confirm log in, it is returning true (user is logged in) or false (user is nor logged in)
+Route::post('/storeCoffeeDB','UserController@storeCoffee');
+Route::get('/userProfile', 'UserController@showUserView');//showing user Profile when a user logs in
 Route::get('/APIGetCoffeeDB','CoffeeController@getCoffeeDB');//getting coffee from database and returning json to Coffeecollection vue

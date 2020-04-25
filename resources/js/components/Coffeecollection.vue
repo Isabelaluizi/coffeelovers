@@ -22,14 +22,8 @@
 </template>
 
 <script>
-
-import Coffee from './Coffee.vue'
-
     export default {
         name:'Coffeecollection',
-        components: {
-            Coffee
-        },
         data() {
             return {
                 coffees: [],
