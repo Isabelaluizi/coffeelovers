@@ -1919,6 +1919,15 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     name: {
       type: String
+    },
+    city: {
+      type: String
+    },
+    country: {
+      type: String
+    },
+    picture: {
+      type: String
     }
   }
 });
@@ -1942,6 +1951,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Coffeecollection',
@@ -1950,17 +1975,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      coffees: {}
+      coffees: [],
+      search: ""
     };
   },
-  methods: {
-    getCoffeeDB: function getCoffeeDB() {
-      var _this = this;
+  mounted: function mounted() {
+    var _this = this;
 
-      axios.get('/APIGetCoffeeDB').then(function (response) {
-        _this.coffees = response.data;
-      })["catch"](function (error) {
-        console.log("Error checking user");
+    axios.get('/APIGetCoffeeDB').then(function (response) {
+      _this.coffees = response.data;
+    })["catch"](function (error) {
+      console.log("Error checking user");
+    });
+  },
+  computed: {
+    filteredCoffees: function filteredCoffees() {
+      var self = this;
+      var matcher = new RegExp(self.search, 'i');
+      return self.coffees.filter(function (coffee) {
+        return matcher.test([coffee.name, coffee.city, coffee.country].join());
       });
     }
   }
@@ -37668,7 +37701,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("p", [_vm._v(_vm._s(_vm.name))])])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37692,16 +37725,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._v("\n    " + _vm._s(_vm.getCoffeeDB()) + "\n    "),
-      _vm._l(_vm.coffees, function(coffee) {
-        return _c("Coffee", { key: coffee.id, attrs: { name: coffee.name } })
+  return _c("div", [
+    _c("form", { staticClass: "form-inline" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Search" },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
       })
-    ],
-    2
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "ul",
+        _vm._l(_vm.filteredCoffees, function(coffee) {
+          return _c("li", { key: coffee.id }, [
+            _c("div", [
+              _vm._v(
+                "\n                    Name:" +
+                  _vm._s(coffee.name) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v(
+                "\n                    Location:" +
+                  _vm._s(coffee.city) +
+                  "," +
+                  _vm._s(coffee.country) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("img", { attrs: { src: "/images/" + coffee.picture } })
+            ])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

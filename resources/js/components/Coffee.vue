@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>{{name}}</p>
+        
     </div>
 </template>
 
@@ -10,6 +10,15 @@
         name:'Coffee',
         props: {
             name: {
+                type:String
+            },
+            city: {
+                type:String
+            },
+            country: {
+                type:String
+            },
+            picture: {
                 type:String
             }
         }
