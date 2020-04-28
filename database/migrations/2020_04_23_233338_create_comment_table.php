@@ -17,7 +17,8 @@ class CreateCommentTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->bigInteger('coffee_id');
-            $table->string('content');
+            $table->text('content');
+            $table->string('nickname');
             $table->bigInteger('stars');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));

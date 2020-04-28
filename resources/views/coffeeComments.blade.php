@@ -2,7 +2,6 @@
 
 @section('content')
 
-<h1>Hi, {{$coffeeId}}</h1>
-
+<Coffeecomment :coffee="{{$coffee}}" />
 
 @endsection

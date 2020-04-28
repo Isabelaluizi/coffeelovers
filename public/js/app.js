@@ -1977,8 +1977,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Coffeecomment'
+  name: 'Coffeecomment',
+  props: {
+    coffee: {
+      type: Object,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    comment: {
+      type: String,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      notComment: true
+    };
+  },
+  methods: {
+    showForm: function showForm() {
+      this.notComment = false;
+    },
+    storeCommentDB: function storeCommentDB() {
+      this.notComment = true;
+    }
+  }
 });
 
 /***/ }),
@@ -37869,7 +37908,98 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("This is my component")])
+  return _c("div", [
+    this.notComment
+      ? _c("img", { attrs: { src: "/storage/" + _vm.coffee.picture } })
+      : _vm._e(),
+    _vm._v(" "),
+    this.notComment
+      ? _c("h6", [_vm._v("Name: " + _vm._s(_vm.coffee.name))])
+      : _vm._e(),
+    _vm._v(" "),
+    this.notComment
+      ? _c("h6", [
+          _vm._v(
+            "Location:" +
+              _vm._s(_vm.coffee.city) +
+              "," +
+              _vm._s(_vm.coffee.country)
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    this.notComment
+      ? _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.showForm()
+              }
+            }
+          },
+          [_vm._v("Comment")]
+        )
+      : _c("div", [
+          _c("p", [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("p", [_vm._v("Comment")]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.comment,
+                expression: "comment"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.comment },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.comment = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.storeCommentDB()
+                }
+              }
+            },
+            [_vm._v("Submit")]
+          )
+        ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -13,7 +13,8 @@ class CoffeeController extends Controller
         return response()->json($coffees);
     }
     function showCoffeeComment ($coffeeId) {
-        return view('coffeeComments',['coffeeId'=>$coffeeId]);
+        $coffee=\App\Coffee::find($coffeeId);
+        return view('coffeeComments',['coffee'=>$coffee]);
     }
 
 
