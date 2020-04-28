@@ -22,7 +22,7 @@ class UserController extends Controller
     }
     function storeCoffee(Request $request) {
         $check=\App\Coffee::where("name","$request->coffeeName")->get();
-        if($check==NULL) {
+        if(sizeOf($check)==0) {
             if($request->file('file')==null) {
                 $coffee = new \App\Coffee;
                 $coffee->user_id = Auth::user()->id;
@@ -40,7 +40,7 @@ class UserController extends Controller
                 $coffee->country = $request->coffeeCountry;
                 $coffee->reviewed = "no";
                 $file = $request->file('file')->store('public');
-                $coffee->picture = $file;
+                $coffee->picture = basename($file);
                 $coffee->save();
             }
             $userMessage="Your submission was completed successfully. We will review your contribution before publishing.";

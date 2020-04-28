@@ -13,7 +13,10 @@
                         Location:{{coffee.city}},{{coffee.country}}
                     </div>
                     <div>
-                        <img :src="'/images/' + coffee.picture">
+                        <a :href="'/showCoffeeComments/'+ coffee.id">Comment</a>
+                    </div>
+                    <div>
+                        <img :src="'/storage/' + coffee.picture">
                     </div>
                 </li>
             </ul>
@@ -36,7 +39,7 @@
                     this.coffees=response.data
                 })
                 .catch(error=> {
-                    console.log("Error checking user");
+                    console.log("Error");
                 });
         },
         computed: {

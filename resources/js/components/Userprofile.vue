@@ -4,8 +4,9 @@
         <h5>We are very happy to have you here</h5>
         <h5>Please, send us your contribution</h5>
         <div>
+            <h6>{{this.userMessage}}</h6>
             <input type="file" name="file" ref="file" id="file" accept=".jpg, .png, .gif">
-            <label for="fileupload"> Select a file to upload</label>
+            <label for="file"> Select a file to upload</label>
             <p>Name:</p>
             <input type="text" v-model="coffeeName">
             <p>City:</p>
@@ -31,7 +32,8 @@ export default {
             coffeeName:'',
             coffeeCity:'',
             coffeeCountry:'',
-            file:null
+            file:null,
+            userMessage:''
         }
     },
     methods: {
@@ -54,7 +56,7 @@ export default {
                     formData.append('coffeeCountry',this.coffeeCountry);
                     axios.post('/storeCoffeeDB', formData, { header: {'Content-Type':'multipart/form-data'} })
                         .then(response=> {
-                            console.log(response.data[0]);
+                            this.userMessage=response.data;
                         })
                         .catch(error=> {
                             console.log("Error checking user");

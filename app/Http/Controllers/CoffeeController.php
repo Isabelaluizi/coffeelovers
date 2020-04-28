@@ -12,4 +12,9 @@ class CoffeeController extends Controller
         $coffees=\App\Coffee::where('reviewed', 'yes')->orderBy('name')->get();
         return response()->json($coffees);
     }
+    function showCoffeeComment ($coffeeId) {
+        return view('coffeeComments',['coffeeId'=>$coffeeId]);
+    }
+
+
 }
