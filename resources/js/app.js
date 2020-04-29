@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('Root', require('./components/Root.vue').default);
 Vue.component('Userprofile', require('./components/Userprofile.vue').default);
 Vue.component('Coffeecomment', require('./components/Coffeecomment.vue').default);
+Vue.component('StarRating', require('vue-star-rating').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

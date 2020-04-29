@@ -24,4 +24,5 @@ Route::get('/APIconfirmLogin','UserController@confirmLogin');//API to confirm lo
 Route::post('/storeCoffeeDB','UserController@storeCoffee');// storing coffee if there is not any coffee already registered
 Route::get('/userProfile', 'UserController@showUserView');//showing user Profile when a user logs in
 Route::get('/APIGetCoffeeDB','CoffeeController@getCoffeeDB');//getting coffee from database and returning json to Coffeecollection vue
-Route::get('/showCoffeeComments/{coffeeId}','CoffeeController@showCoffeeComment');
+Route::get('/showCoffeeComments/{coffeeId}','CoffeeController@showCoffeeComment');//coming from a tag and sending to comment page
+Route::post('/storeComment','CommentController@storeCommentDB');

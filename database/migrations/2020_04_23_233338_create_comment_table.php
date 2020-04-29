@@ -19,7 +19,7 @@ class CreateCommentTable extends Migration
             $table->bigInteger('coffee_id');
             $table->text('content');
             $table->string('nickname');
-            $table->bigInteger('stars');
+            $table->string('stars');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
         });
