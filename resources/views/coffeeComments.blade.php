@@ -2,6 +2,6 @@
 
 @section('content')
 
-<Coffeecomment :coffee="{{$coffee}}" />
+<Coffeecomment :coffee="{{$coffee}}" :comments="{{$comments}}" />
 
 @endsection

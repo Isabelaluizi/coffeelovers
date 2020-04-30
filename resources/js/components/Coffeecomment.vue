@@ -4,7 +4,13 @@
             <img :src="'/storage/' + coffee.picture">
             <h6>Name: {{coffee.name}}</h6>
             <h6>Location:{{coffee.city}},{{coffee.country}}</h6>
+            <div v-if="this.userLoggedin">
+                <p>Sorry, you need to login to comment</p>
+                <a href="/login">Login</a>
+                <a href="/register">Become a member</a>
+            </div>
             <button @click="showForm()">Comment</button>
+            <Comment v-for="comment in comments" :key="comment.id" :comment="comment"   />
         </div>
         <div v-else>
             <p>{{this.userMessage}}</p>
@@ -19,17 +25,26 @@
 </template>
 
 <script>
+import Comment from './Comment'
 export default {
     name:'Coffeecomment',
+    components: {
+        Comment
+    },
     props: {
         coffee: {
             type:Object,
+            required: true
+        },
+        comments: {
+            type:Array,
             required: true
         }
     },
     data() {
         return {
             notComment: true,
+            userLoggedin:false,
             name:'',
             comment:'',
             rating: 0,
@@ -38,7 +53,17 @@ export default {
     },
     methods: {
         showForm() {
-            this.notComment=false;
+            axios.get('/APIconfirmLogin')
+                .then(response=> {
+                    if(!response.data==true){
+                        this.userLoggedin=!response.data;
+                    } else {
+                        this.notComment=false;
+                    }
+                })
+                .catch(error=> {
+                    console.log("Error checking user");
+                });
         },
         storeCommentDB() {
             axios.post('/storeComment',{name:this.name, comment:this.comment, coffeeId: this.coffee.id, stars: this.rating})
@@ -56,9 +81,8 @@ export default {
                 .catch(error=> {
                     console.log("Error storing data");
                 });
-
-
         },
     }
 }
+
 </script>
