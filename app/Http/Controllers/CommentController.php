@@ -30,4 +30,9 @@ class CommentController extends Controller
         $comment->save();
         return response()->json("ok");
     }
+
+    function getCommentCoffee (Request $request) {
+        $comments=\App\Coffee::find($request->coffeeId)->comments;
+        return response()->json($comments);
+    }
 }

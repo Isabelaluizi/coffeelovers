@@ -25,4 +25,6 @@ Route::post('/storeCoffeeDB','UserController@storeCoffee');// storing coffee if 
 Route::get('/userProfile', 'UserController@showUserView');//showing user Profile when a user logs in
 Route::get('/APIGetCoffeeDB','CoffeeController@getCoffeeDB');//getting coffee from database and returning json to Coffeecollection vue
 Route::get('/showCoffeeComments/{coffeeId}','CoffeeController@showCoffeeComment');//coming from a tag and sending to comment page
-Route::post('/storeComment','CommentController@storeCommentDB');
+Route::post('/storeComment','CommentController@storeCommentDB');//coming from Coffee comment and storing comment on DB
+Route::post('/getComments','CommentController@getCommentCoffee');//getting all comment related of one kind of coffee
+Route::get('/getCoffeeAdmin','UserController@getCoffeeToReview');//getting all coffee not reviewed to be reviewed

@@ -10,7 +10,7 @@
                 <a href="/register">Become a member</a>
             </div>
             <button @click="showForm()">Comment</button>
-            <Comment v-for="comment in comments" :key="comment.id" :comment="comment"   />
+            <Comment v-for="comment in getComment" :key="comment.id" :comment="comment" />
         </div>
         <div v-else>
             <p>{{this.userMessage}}</p>
@@ -35,10 +35,6 @@ export default {
         coffee: {
             type:Object,
             required: true
-        },
-        comments: {
-            type:Array,
-            required: true
         }
     },
     data() {
@@ -46,9 +42,10 @@ export default {
             notComment: true,
             userLoggedin:false,
             name:'',
-            comment:'',
+            comments:[],
             rating: 0,
-            userMessage:''
+            userMessage:'',
+            comment:''
         }
     },
     methods: {
@@ -81,7 +78,19 @@ export default {
                 .catch(error=> {
                     console.log("Error storing data");
                 });
-        },
+        }
+    },
+    computed:{
+        getComment(){
+            axios.post('/getComments', {coffeeId: this.coffee.id})
+            .then(response=> {
+                this.comments=response.data;
+            })
+            .catch(error=> {
+                console.log("Error getting comment");
+            });
+            return this.comments;
+        }
     }
 }
 

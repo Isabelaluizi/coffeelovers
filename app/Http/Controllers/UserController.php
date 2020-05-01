@@ -10,6 +10,9 @@ use Auth;
 class UserController extends Controller
 {
     function showUserView() {
+        if(Auth::user()->id==1) {
+            return view('adminView');
+        }
         return view('userView');
     }
     function confirmLogin() {
@@ -48,5 +51,9 @@ class UserController extends Controller
             $userMessage="Sorry, this coffee has already existed on our database.";
         }
         return response()->json($userMessage);
+    }
+    function getCoffeeToReview() {
+        $coffees = \App\Coffee::where('reviewed','no')->get();
+        return response()->json($coffees);
     }
 }
