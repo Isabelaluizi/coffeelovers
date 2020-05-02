@@ -28,3 +28,7 @@ Route::get('/showCoffeeComments/{coffeeId}','CoffeeController@showCoffeeComment'
 Route::post('/storeComment','CommentController@storeCommentDB');//coming from Coffee comment and storing comment on DB
 Route::post('/getComments','CommentController@getCommentCoffee');//getting all comment related of one kind of coffee
 Route::get('/getCoffeeAdmin','UserController@getCoffeeToReview');//getting all coffee not reviewed to be reviewed
+Route::post('/changeReviewedCoffee','UserController@updatedCoffee');//changing coffee DB (reviewed - no to yes)
+Route::post('/deleteCoffee', 'UserController@deleteCoffeeDB');//deleting contribution permanently
+Route::post('/checkUserComment','UserController@checkIds');//checking user_id in comment and in Auth to permit user delete comment
+Route::post('/deleteComment', 'CommentController@deleteComment');//deleting comment on DB permanently

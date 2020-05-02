@@ -1923,12 +1923,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Admin',
   data: function data() {
     return {
       coffees: [],
-      checkedcoffees: []
+      checkedCoffees: [],
+      message: ''
     };
   },
   computed: {
@@ -1941,6 +1945,34 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Error checking user");
       });
       return this.coffees;
+    }
+  },
+  methods: {
+    reviewedCoffee: function reviewedCoffee() {
+      var _this2 = this;
+
+      axios.post('/changeReviewedCoffee', {
+        reviewedCoffee: this.checkedCoffees
+      }).then(function (response) {
+        _this2.message = response.data;
+        _this2.checkedCoffees = [];
+      })["catch"](function (error) {
+        console.log("Error changing coffee");
+      });
+    },
+    rejectContribution: function rejectContribution() {
+      var _this3 = this;
+
+      if (confirm('Are you sure you want to reject these contribution')) {
+        axios.post('/deleteCoffee', {
+          reviewedCoffee: this.checkedCoffees
+        }).then(function (response) {
+          _this3.message = response.data;
+          _this3.checkedCoffees = [];
+        })["catch"](function (error) {
+          console.log("Error changing coffee");
+        });
+      }
     }
   }
 });
@@ -2144,6 +2176,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2156,16 +2194,44 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
   },
   data: function data() {
     return {
-      date: ''
+      date: '',
+      isUser: false,
+      confirmation: false,
+      confirmed: false
     };
   },
   methods: {
     stars: function stars(_stars) {
       return parseFloat(_stars);
+    },
+    confirmDelete: function confirmDelete() {
+      this.confirmation = true;
+    },
+    clickedYes: function clickedYes() {
+      axios.post('/deleteComment', {
+        commentId: this.comment.id,
+        userId: this.comment.user_id
+      }).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log("Error checking user");
+      });
+    },
+    clickedNo: function clickedNo() {
+      this.confirmation = false;
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.date = moment.parseZone(this.comment.created_at).fromNow();
+    axios.post('/checkUserComment', {
+      userId: this.comment.user_id
+    }).then(function (response) {
+      _this.isUser = response.data;
+    })["catch"](function (error) {
+      console.log("Error checking user");
+    });
   }
 });
 
@@ -55579,48 +55645,54 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.getCoffeeToReview, function(coffee) {
-      return _c("div", { key: coffee.id }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.checkedCoffees,
-              expression: "checkedCoffees"
-            }
-          ],
-          attrs: { type: "checkbox", id: "checkbox" },
-          domProps: {
-            checked: Array.isArray(_vm.checkedCoffees)
-              ? _vm._i(_vm.checkedCoffees, null) > -1
-              : _vm.checkedCoffees
-          },
-          on: {
-            change: function($event) {
-              var $$a = _vm.checkedCoffees,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.checkedCoffees = $$a.concat([$$v]))
+    [
+      _c("h1", [_vm._v("Coffee")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(this.message))]),
+      _vm._v(" "),
+      _vm._l(_vm.getCoffeeToReview, function(coffee) {
+        return _c("div", { key: coffee.id }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.checkedCoffees,
+                expression: "checkedCoffees"
+              }
+            ],
+            attrs: { type: "checkbox", id: coffee.id },
+            domProps: {
+              value: coffee.id,
+              checked: Array.isArray(_vm.checkedCoffees)
+                ? _vm._i(_vm.checkedCoffees, coffee.id) > -1
+                : _vm.checkedCoffees
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.checkedCoffees,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = coffee.id,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.checkedCoffees = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.checkedCoffees = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
+                  }
                 } else {
-                  $$i > -1 &&
-                    (_vm.checkedCoffees = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
+                  _vm.checkedCoffees = $$c
                 }
-              } else {
-                _vm.checkedCoffees = $$c
               }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "checkbox" } }, [
-          _vm._v(_vm._s(_vm.checkedCoffees) + "\n            "),
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: coffee.id } }),
+          _vm._v(" "),
           _c("p", [_vm._v(_vm._s(coffee.name))]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(coffee.city))]),
@@ -55629,9 +55701,33 @@ var render = function() {
           _vm._v(" "),
           _c("img", { attrs: { src: "/storage/" + coffee.picture } })
         ])
-      ])
-    }),
-    0
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              return _vm.reviewedCoffee()
+            }
+          }
+        },
+        [_vm._v("Accept")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              return _vm.rejectContribution()
+            }
+          }
+        },
+        [_vm._v("Reject")]
+      )
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -55909,7 +56005,51 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(this.date))])
+      _c("p", [_vm._v(_vm._s(this.date))]),
+      _vm._v(" "),
+      this.isUser
+        ? _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.confirmDelete()
+                }
+              }
+            },
+            [_vm._v("Delete")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      this.confirmation
+        ? _c("div", [
+            _c("p", [_vm._v("Are you sure you want to Delete this comment? ")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.clickedYes()
+                  }
+                }
+              },
+              [_vm._v("Yes")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.clickedNo()
+                  }
+                }
+              },
+              [_vm._v("No")]
+            )
+          ])
+        : _vm._e()
     ],
     1
   )

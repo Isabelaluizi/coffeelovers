@@ -14,7 +14,10 @@ class CoffeeController extends Controller
     }
     function showCoffeeComment ($coffeeId) {
         $coffee=\App\Coffee::find($coffeeId);
-        return view('coffeeComments',['coffee'=>$coffee]);
+        if($coffee!=null) {
+            return view('coffeeComments',['coffee'=>$coffee]);
+        }
+        return redirect('/');
     }
 
 }
