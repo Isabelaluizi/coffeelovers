@@ -34,7 +34,7 @@ class UserController extends Controller
                     $coffee->city = $request->coffeeCity;
                     $coffee->country = $request->coffeeCountry;
                     $coffee->reviewed = "no";
-                    $coffee->picture = "";
+                    $coffee->picture = "default.jpg";
                     $coffee->save();
                 } else {
                     $coffee = new \App\Coffee;
@@ -79,7 +79,7 @@ class UserController extends Controller
             foreach($request->reviewedCoffee as $id) {
                 \App\Coffee::destroy($id);
             }
-            if(sizeOf($request->reviewedCoffee)>1) {
+            if(sizeOf($request->reviewedCoffee)>=1) {
                 return response()->json("Selected coffee were deleted");
             } else {
                 return response()->json("Selected coffee were deleted. There is no coffee to be reviewed");

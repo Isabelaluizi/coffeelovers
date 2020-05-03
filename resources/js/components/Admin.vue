@@ -1,8 +1,7 @@
 <template>
     <div>
         <h1>Coffee</h1>
-        <p
-        >{{this.message}}</p>
+        <p>{{this.message}}</p>
         <div v-for="coffee in getCoffeeToReview" :key="coffee.id">
             <input type="checkbox" :id="coffee.id" :value="coffee.id" v-model="checkedCoffees">
             <label :for="coffee.id"></label>
@@ -40,18 +39,10 @@ export default {
     },
     methods: {
         reviewedCoffee() {
-            axios.post('/changeReviewedCoffee',{reviewedCoffee:this.checkedCoffees})
-                .then(response=> {
-                  this.message=response.data;
-                  this.checkedCoffees=[];
-                })
-                .catch(error=> {
-                    console.log("Error changing coffee");
-                });
-        },
-        rejectContribution() {
-            if(confirm('Are you sure you want to reject these contribution')) {
-                axios.post('/deleteCoffee',{reviewedCoffee:this.checkedCoffees})
+            if(this.checkedCoffees.length==0){
+                this.message= "Please, select coffee to be accepted"
+            } else {
+                axios.post('/changeReviewedCoffee',{reviewedCoffee:this.checkedCoffees})
                     .then(response=> {
                     this.message=response.data;
                     this.checkedCoffees=[];
@@ -59,6 +50,22 @@ export default {
                     .catch(error=> {
                         console.log("Error changing coffee");
                     });
+            }
+        },
+        rejectContribution() {
+             if(this.checkedCoffees.length==0){
+                this.message= "Please, select coffee to be rejected"
+            } else {
+                if(confirm('Are you sure you want to reject these contribution')) {
+                    axios.post('/deleteCoffee',{reviewedCoffee:this.checkedCoffees})
+                        .then(response=> {
+                        this.message=response.data;
+                        this.checkedCoffees=[];
+                        })
+                        .catch(error=> {
+                            console.log("Error changing coffee");
+                        });
+                }
             }
         }
     }
