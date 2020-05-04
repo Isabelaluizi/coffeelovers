@@ -1,21 +1,33 @@
 <template>
-    <div>
-        <h1>Welcome, {{auth.name}} </h1>
-        <h5>We are very happy to have you here</h5>
-        <h5>Please, send us your contribution</h5>
-        <div>
-            <h6>{{this.userMessage}}</h6>
-            <input type="file" name="file" ref="file" id="file" accept=".jpg, .png, .gif">
-            <label for="file"> Select a file to upload</label>
-            <p>Name:</p>
-            <input type="text" v-model="coffeeName">
-            <p>City:</p>
-            <input type="text" v-model="coffeeCity">
-            <p>Country:</p>
-            <input type="text" v-model="coffeeCountry">
-            <button @click="storeCoffee()">Submit</button>
+    <div id="user-page-container">
+        <img src="/images/userPage.jpg" class="rounded mx-auto d-block img-fluid">
+        <div class="container">
+            <h1 id="greeting-user" class="text-center">Hi, {{auth.name}}</h1>
+            <h5 class="text-center">We are very happy to have you here.</h5>
+        <div class="shadow-lg p-3 mb-5 bg-white rounded" id="form-add-coffee">
+            <h5 class="text-center">Please, send us your contribution.</h5>
+            <div class="text-center">
+                <h6 class="text-center">{{this.userMessage}}</h6>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Coffee's name" v-model="coffeeName">
+            </div>
+            <div class="form-group">
+                    <input class="form-control" placeholder="City" type="text" v-model="coffeeCity">
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Country" type="text" v-model="coffeeCountry">
+            </div>
+            <div>
+                <label for="file"> Select a file to upload</label>
+                <input type="file" name="file" ref="file" id="file" accept=".jpg, .png, .gif">
+            </div>
+            <div class="text-center" id="button-submit-coffee">
+                    <button type="button" class="btn btn-outline-dark" @click="storeCoffee()">Submit</button>
+            </div>
+            </div>
+            </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -66,3 +78,28 @@ export default {
             }
         }
 </script>
+
+<style scoped>
+#user-page-container {
+    margin-top:0;
+    padding-top:0;
+}
+#greeting-user{
+    color:#7a2e20;
+    margin-top:1vh;
+}
+#button-submit-coffee{
+    margin-top:1vh;
+    margin-bottom:2vh;
+}
+#form-add-coffee{
+    margin-top:3vh;
+}
+
+
+
+
+
+
+</style>
+
