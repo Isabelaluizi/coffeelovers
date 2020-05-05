@@ -1,15 +1,21 @@
 <template>
-    <div>
-        <div v-if="this.notComment">
-            <img :src="'/storage/' + coffee.picture">
-            <h6>Name: {{coffee.name}}</h6>
-            <h6>Location:{{coffee.city}},{{coffee.country}}</h6>
-            <div v-if="this.userLoggedin">
-                <p>Sorry, you need to login to comment</p>
-                <a href="/login">Login</a>
-                <a href="/register">Become a member</a>
+    <div class="container" id="container-coffeecomment">
+        <div v-if="this.notComment" class="row justify-content-center align-items-center">
+            <div class="col-10 col-xl-4">
+                <h5><span class="change-color"><strong>Name: </strong></span>{{coffee.name}}</h5>
+                <h5><span class="change-color"><strong>Location: </strong></span>{{coffee.city}},{{coffee.country}}</h5>
             </div>
-            <button @click="showForm()">Comment</button>
+            <div class="col-10 col-xl-2">
+                <img :src="'/storage/' + coffee.picture" class="rounded mx-auto d-block img-fluid">
+                <div v-if="this.userLoggedin">
+                    <p>Sorry, you need to login to comment</p>
+                    <a href="/login">Login</a>
+                    <a href="/register">Become a member</a>
+                </div>
+            </div>
+            <div class="col-12 col-xl-12 text-center">
+                <button class="btn btn-outline-dark" role="button" id="button-comment" @click="showForm()">Comment</button>
+            </div>
             <Comment v-for="comment in getComment" :key="comment.id" :comment="comment" />
         </div>
         <div v-else>
@@ -95,3 +101,16 @@ export default {
 }
 
 </script>
+
+<style scoped>
+#container-coffeecomment{
+    margin-top:3vh;
+}
+.change-color{
+     color:#7a2e20;
+}
+#button-comment{
+    margin-top:1.5vh;
+    margin-bottom:3vh;
+}
+</style>

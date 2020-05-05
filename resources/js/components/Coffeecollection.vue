@@ -21,8 +21,8 @@
                     <a class="btn btn-dark button-styled" role="button"  href="/register">Register</a>
                 </div>
             </div>
-            <div class="form-group row justify-content-xl-center">
-                <div class="input-group col-xl-10">
+            <div class="form-group row">
+                <div class="input-group col-xl-12">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
                     </div>
@@ -35,9 +35,10 @@
                         <div class="col-12 col-xl-10  order-xl-2 align-self-center">
                             <h5><span class="change-color"><strong>Name: </strong></span>{{coffee.name}}</h5>
                             <h5><span class="change-color"><strong>Location: </strong></span>{{coffee.city}},{{coffee.country}}</h5>
+                            <Showstar :coffeeId="coffee.id" />
                         </div>
                         <div class="col-xl-2 order-xl-1">
-                            <img class="img-fluid rounded mx-auto d-block" :src="'/storage/' + coffee.picture">
+                            <img class="img-fluid rounded mx-auto d-block picture-coffee" :src="'/storage/' + coffee.picture">
                         </div>
                         <div class="text-center col-12 col-xl-12 order-xl-12">
                             <a class="btn btn-outline-dark" id="button-comment" role="button" :href="'/showCoffeeComments/'+ coffee.id">Comment</a>
@@ -50,13 +51,17 @@
 </template>
 
 <script>
+import Showstar from './Showstar.vue'
     export default {
         name:'Coffeecollection',
+        components:{
+            Showstar
+        },
         data() {
             return {
                 coffees: [],
                 search: "",
-                userLoggedin: null
+                userLoggedin: null,
                 }
         },
         mounted() {
@@ -89,9 +94,6 @@
 </script>
 
 <style scoped>
-    #coffee-picture{
-        width:50%;
-    }
     .button-styled{
         background-color:#7a2e20;
         border:#7a2e20;
@@ -124,6 +126,9 @@
         margin-bottom:3vh;
         padding-bottom:3vh;
         padding-top:3vh;
+    }
+    .picture-coffee{
+        margin-top:1.5vh;
     }
 </style>
 

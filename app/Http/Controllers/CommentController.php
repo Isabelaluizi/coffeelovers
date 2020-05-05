@@ -42,4 +42,20 @@ class CommentController extends Controller
             \App\Comment::destroy($request->commentId);
         }
     }
+    function calculateAvgStars (Request $request){
+        $comments=\App\Coffee::find($request->coffeeId)->comments;
+        $count=0;
+        $sum=0;
+        $avg=0;
+        if(sizeOf($comments)==0) {
+            return response()->json($avg);
+        } else {
+            foreach($comments as $comment){
+                $sum += (float)$comment->stars;
+                $count++;
+            }
+            $avg=$sum/$count;
+            return response()->json($avg);
+        }
+    }
 }

@@ -32,3 +32,4 @@ Route::post('/changeReviewedCoffee','UserController@updatedCoffee');//changing c
 Route::post('/deleteCoffee', 'UserController@deleteCoffeeDB');//deleting contribution permanently
 Route::post('/checkUserComment','UserController@checkIds');//checking user_id in comment and in Auth to permit user delete comment
 Route::post('/deleteComment', 'CommentController@deleteComment');//deleting comment on DB permanently
+Route::post('/getStars', 'CommentController@calculateAvgStars');//passing coffee Id and returning avg stars

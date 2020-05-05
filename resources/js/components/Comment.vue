@@ -1,14 +1,28 @@
 <template>
-    <div>
-        <p>Name: {{comment.nickname}}</p>
-        <p>Comment:{{comment.content}}</p>
-        <star-rating :rating="stars(comment.stars)" :read-only="true" :increment="0.5" :star-size="20" :show-rating="false"></star-rating>
-        <p>{{this.date}}</p>
-        <button v-if="this.isUser" @click="confirmDelete()">Delete</button>
-        <div v-if="this.confirmation">
-            <p>Are you sure you want to Delete this comment? </p>
-             <button @click="clickedYes()">Yes</button>
-             <button @click="clickedNo()">No</button>
+    <div class="col-12">
+        <div class="container">
+            <div class="row justify-content-xl-start shadow-lg p-3 mb-5 bg-white rounded" id="row-comment">
+                <div class="col-7 col-xl-2  ">
+                    <h5> {{comment.nickname}}</h5>
+                </div>
+                <div class="col-5 col-xl-2">
+                    <star-rating :rating="stars(comment.stars)" :read-only="true" :increment="0.5" :star-size="20" :show-rating="false"></star-rating>
+                </div>
+                <div class="col-12 col-xl-12 text-center align-self-center">
+                    <h5>{{comment.content}}</h5>
+                </div>
+                <div class="col-12 col-xl-12 text-right">
+                    <p>{{this.date}}</p>
+                </div>
+                <div class="col-12 col-xl-12 text-center">
+                    <button class="btn btn-light" id="button-delete" role="button" v-if="this.isUser" @click="confirmDelete()"><i class="fas fa-trash-alt"></i> Delete</button>
+                </div>
+                <div v-if="this.confirmation" class="alert alert-danger col-12 col-xl-12 text-center" role="alert" id="alert-delete">
+                    <p>Are you sure you want to delete this comment? </p>
+                    <button type="button" class="btn btn-outline-danger btn-sm" @click="clickedYes()">Yes</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" @click="clickedNo()">No</button>
+                </div>
+        </div>
         </div>
     </div>
 </template>
@@ -65,3 +79,9 @@ export default {
 
 }
 </script>
+
+<style scoped>
+#alert-delete{
+    margin-top:1vh;
+}
+</style>
