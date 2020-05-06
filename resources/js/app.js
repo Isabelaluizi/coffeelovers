@@ -6,6 +6,10 @@
 
 require('./bootstrap');
 
+$(document).ready(function(){
+    $(".dropdown-toggle").dropdown();
+});
+
 window.Vue = require('vue');
 
 /**

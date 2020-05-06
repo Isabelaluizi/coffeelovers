@@ -12,8 +12,11 @@ class UserController extends Controller
     function showUserView() {
         if(Auth::user()->id==1) {
             return view('adminView');
+        } else if (Auth::check()){
+            return view('userView');
+        } else {
+            return redirect('/');
         }
-        return view('userView');
     }
     function confirmLogin() {
         if(Auth::check()) {
@@ -67,11 +70,12 @@ class UserController extends Controller
                 $coffee->reviewed = 'yes';
                 $coffee->save();
             }
-            if(sizeOf($request->reviewedCoffee)>1) {
-                return response()->json("Revision made successfully");
-            } else {
+            $reviews=\App\Coffee::where('reviewed','no')->get();
+            error_log(sizeOf($reviews));
+            if(sizeOf($reviews)==0) {
                 return response()->json("Revision made successfully. There is no coffee to be reviewed");
             }
+            return response()->json("Revision made successfully. ");
         }
     }
     function deleteCoffeeDB (Request $request) {
@@ -79,17 +83,20 @@ class UserController extends Controller
             foreach($request->reviewedCoffee as $id) {
                 \App\Coffee::destroy($id);
             }
-            if(sizeOf($request->reviewedCoffee)>=1) {
-                return response()->json("Selected coffee were deleted");
-            } else {
+            $reviews=\App\Coffee::where('reviewed','no')->get();
+            error_log(sizeOf($reviews));
+            if(sizeOf($reviews)==0) {
                 return response()->json("Selected coffee were deleted. There is no coffee to be reviewed");
             }
+            return response()->json("Selected coffee were deleted.");
         }
     }
     function checkIds (Request $request) {
         $isUser=false;
-        if(Auth::user()->id == $request->userId){
-            $isUser=true;
+        if(Auth::check()){
+            if(Auth::user()->id == $request->userId){
+                $isUser=true;
+            }
         }
         return response()->json($isUser);
     }
