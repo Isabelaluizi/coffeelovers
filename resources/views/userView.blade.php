@@ -2,6 +2,6 @@
 
 @section('content')
 
-<Userprofile :auth="{{Auth::user()}}" />
+    <Userprofile :auth="{{Auth::user()}}" />
 
 @endsection

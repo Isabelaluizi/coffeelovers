@@ -1941,20 +1941,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Admin',
+  name: "Admin",
   data: function data() {
     return {
       coffees: [],
       checkedCoffees: [],
-      message: ''
+      message: ""
     };
   },
   computed: {
     getCoffeeToReview: function getCoffeeToReview() {
       var _this = this;
 
-      axios.get('/getCoffeeAdmin').then(function (response) {
+      axios.get("/getCoffeeAdmin").then(function (response) {
         _this.coffees = response.data;
       })["catch"](function (error) {
         console.log("Error checking user");
@@ -1969,7 +1975,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.checkedCoffees.length == 0) {
         this.message = "Please, select coffee to be accepted";
       } else {
-        axios.post('/changeReviewedCoffee', {
+        axios.post("/changeReviewedCoffee", {
           reviewedCoffee: this.checkedCoffees
         }).then(function (response) {
           _this2.message = response.data;
@@ -1985,8 +1991,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.checkedCoffees.length == 0) {
         this.message = "Please, select coffee to be rejected";
       } else {
-        if (confirm('Are you sure you want to reject these coffee from database')) {
-          axios.post('/deleteCoffee', {
+        if (confirm("Are you sure you want to reject these coffee from database")) {
+          axios.post("/deleteCoffee", {
             reviewedCoffee: this.checkedCoffees
           }).then(function (response) {
             _this3.message = response.data;
@@ -2064,9 +2070,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Coffeecollection',
+  name: "Coffeecollection",
   components: {
     Showstar: _Showstar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2080,12 +2163,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/APIGetCoffeeDB').then(function (response) {
+    axios.get("/APIGetCoffeeDB").then(function (response) {
       _this.coffees = response.data;
     })["catch"](function (error) {
       console.log("Error");
     });
-    axios.get('/APIconfirmLogin').then(function (response) {
+    axios.get("/APIconfirmLogin").then(function (response) {
       console.log(response.data);
       _this.userLoggedin = response.data;
     })["catch"](function (error) {
@@ -2095,7 +2178,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     filteredCoffees: function filteredCoffees() {
       var self = this;
-      var matcher = new RegExp(self.search, 'i');
+      var matcher = new RegExp(self.search, "i");
       return self.coffees.filter(function (coffee) {
         return matcher.test([coffee.name, coffee.city, coffee.country].join());
       });
@@ -2158,9 +2241,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Coffeecomment',
+  name: "Coffeecomment",
   components: {
     Comment: _Comment__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2174,18 +2293,18 @@ __webpack_require__.r(__webpack_exports__);
     return {
       notComment: true,
       userLoggedin: false,
-      name: '',
+      name: "",
       comments: [],
       rating: 0,
-      userMessage: '',
-      comment: ''
+      userMessage: "",
+      comment: ""
     };
   },
   methods: {
     showForm: function showForm() {
       var _this = this;
 
-      axios.get('/APIconfirmLogin').then(function (response) {
+      axios.get("/APIconfirmLogin").then(function (response) {
         if (!response.data == true) {
           _this.userLoggedin = !response.data;
         } else {
@@ -2198,7 +2317,7 @@ __webpack_require__.r(__webpack_exports__);
     storeCommentDB: function storeCommentDB() {
       var _this2 = this;
 
-      axios.post('/storeComment', {
+      axios.post("/storeComment", {
         name: this.name,
         comment: this.comment,
         coffeeId: this.coffee.id,
@@ -2226,7 +2345,7 @@ __webpack_require__.r(__webpack_exports__);
     getComment: function getComment() {
       var _this3 = this;
 
-      axios.post('/getComments', {
+      axios.post("/getComments", {
         coffeeId: this.coffee.id
       }).then(function (response) {
         _this3.comments = response.data;
@@ -2278,10 +2397,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Comment',
+  name: "Comment",
   props: {
     comment: {
       type: Object,
@@ -2290,7 +2431,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
   },
   data: function data() {
     return {
-      date: '',
+      date: "",
       isUser: false,
       confirmation: false,
       confirmed: false
@@ -2304,7 +2445,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       this.confirmation = true;
     },
     clickedYes: function clickedYes() {
-      axios.post('/deleteComment', {
+      axios.post("/deleteComment", {
         commentId: this.comment.id,
         userId: this.comment.user_id
       }).then(function (response) {
@@ -2321,7 +2462,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     var _this = this;
 
     this.date = moment.parseZone(this.comment.created_at).fromNow();
-    axios.post('/checkUserComment', {
+    axios.post("/checkUserComment", {
       userId: this.comment.user_id
     }).then(function (response) {
       _this.isUser = response.data;
@@ -2358,8 +2499,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Introduction'
+  name: "Introduction"
 });
 
 /***/ }),
@@ -2385,7 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Root',
+  name: "Root",
   components: {
     Introduction: _Introduction_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Coffeecollection: _Coffeecollection_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2410,8 +2582,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Showstar',
+  name: "Showstar",
   props: {
     coffeeId: {
       type: Number,
@@ -2426,7 +2608,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.post('/getStars', {
+    axios.post("/getStars", {
       coffeeId: this.coffeeId
     }).then(function (response) {
       _this.stars = response.data;
@@ -2484,8 +2666,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Userprofile',
+  name: "Userprofile",
   props: {
     auth: {
       type: Object,
@@ -2494,11 +2688,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      coffeeName: '',
-      coffeeCity: '',
-      coffeeCountry: '',
+      coffeeName: "",
+      coffeeCity: "",
+      coffeeCountry: "",
       file: null,
-      userMessage: ''
+      userMessage: ""
     };
   },
   methods: {
@@ -2506,28 +2700,27 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (confirm("Thank you for your contribution.\nClick OK to confirm your submition.")) {
-        if (this.coffeeName == '') {
-          this.coffeeName = 'N/D';
+        if (this.coffeeName == "") {
+          this.coffeeName = "N/D";
         }
 
-        if (this.coffeeCity == '') {
-          this.coffeeCity = 'N/D';
+        if (this.coffeeCity == "") {
+          this.coffeeCity = "N/D";
         }
 
-        if (this.coffeeCountry == '') {
-          this.coffeeCountry = 'N/D';
+        if (this.coffeeCountry == "") {
+          this.coffeeCountry = "N/D";
         }
 
-        ;
         this.file = this.$refs.file.files[0];
         var formData = new FormData();
-        formData.append('file', this.file);
-        formData.append('coffeeName', this.coffeeName);
-        formData.append('coffeeCity', this.coffeeCity);
-        formData.append('coffeeCountry', this.coffeeCountry);
-        axios.post('/storeCoffeeDB', formData, {
+        formData.append("file", this.file);
+        formData.append("coffeeName", this.coffeeName);
+        formData.append("coffeeCity", this.coffeeCity);
+        formData.append("coffeeCountry", this.coffeeCountry);
+        axios.post("/storeCoffeeDB", formData, {
           header: {
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data"
           }
         }).then(function (response) {
           _this.userMessage = response.data;
@@ -7084,7 +7277,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#change-font-size[data-v-58b78718]{\n    font-size:20px;\n}\n#inside-container[data-v-58b78718]{\n        margin-top:3vh;\n        padding-bottom:2vh;\n}\n.change-color[data-v-58b78718]{\n    color:#7a2e20;\n}\n#styled-alert[data-v-58b78718]{\n    position:-webkit-sticky;\n    position:sticky;\n    top:0;\n    z-index: 1000;\n}\n", ""]);
+exports.push([module.i, "\n#change-font-size[data-v-58b78718] {\n  font-size: 20px;\n}\n#inside-container[data-v-58b78718] {\n  margin-top: 3vh;\n  padding-bottom: 2vh;\n}\n.change-color[data-v-58b78718] {\n  color: #7a2e20;\n}\n#styled-alert[data-v-58b78718] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1000;\n}\n", ""]);
 
 // exports
 
@@ -7103,7 +7296,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.button-styled[data-v-07ffe656]{\n    background-color:#7a2e20;\n    border:#7a2e20;\n    margin-bottom:2vh;\n    margin-top:2vh;\n}\n.change-color[data-v-07ffe656]{\n    color:#7a2e20;\n}\n#collaborative-picture[data-v-07ffe656]{\n    width:100%;\n    fill:#7a2e20;\n}\n#button-comment[data-v-07ffe656]{\n    margin-top:1.5vh;\n}\n#container-wallpaper[data-v-07ffe656] {\n    position: fixed;\n    width:100vw;\n    height: 100vh;\n    background-image:url('/images/coffeeIntroduction.jpg');\n    opacity:0.5;\n    z-index:-1;\n    top:0;\n}\n#inside-container[data-v-07ffe656]{\n    background-color:white;\n    width:92vw;\n    margin-top:3vh;\n    margin-bottom:3vh;\n    padding-bottom:3vh;\n    padding-top:3vh;\n}\n.picture-coffee[data-v-07ffe656]{\n    margin-top:1.5vh;\n}\n", ""]);
+exports.push([module.i, "\n.button-styled[data-v-07ffe656] {\n  background-color: #7a2e20;\n  border: #7a2e20;\n  margin-bottom: 2vh;\n  margin-top: 2vh;\n}\n.change-color[data-v-07ffe656] {\n  color: #7a2e20;\n}\n#collaborative-picture[data-v-07ffe656] {\n  width: 100%;\n  fill: #7a2e20;\n}\n#button-comment[data-v-07ffe656] {\n  margin-top: 1.5vh;\n}\n#container-wallpaper[data-v-07ffe656] {\n  position: fixed;\n  width: 100vw;\n  height: 100vh;\n  background-image: url(\"/images/coffeeIntroduction.jpg\");\n  opacity: 0.5;\n  z-index: -1;\n  top: 0;\n}\n#inside-container[data-v-07ffe656] {\n  background-color: white;\n  width: 92vw;\n  margin-top: 3vh;\n  margin-bottom: 3vh;\n  padding-bottom: 3vh;\n  padding-top: 3vh;\n}\n.picture-coffee[data-v-07ffe656] {\n  margin-top: 1.5vh;\n}\n", ""]);
 
 // exports
 
@@ -7122,7 +7315,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#container-coffeecomment[data-v-5c8e4b38]{\n    margin-top:3vh;\n}\n.change-color[data-v-5c8e4b38]{\n     color:#7a2e20;\n}\n#button-comment[data-v-5c8e4b38]{\n    margin-top:1.5vh;\n    margin-bottom:3vh;\n}\n.login-alert[data-v-5c8e4b38]{\n    margin-top:2vh;\n}\n.overlay-paper[data-v-5c8e4b38]{\n    position: fixed;\n    width:100vw;\n    height: 100vh;\n    background-color:black;\n    opacity:0.5;\n    top:0;\n    z-index:100;\n}\n#comment-form[data-v-5c8e4b38]{\n    position:fixed;\n    top:20vh;\n    right:20vw;\n    left:20vw;\n    background-color:white;\n    z-index:1000;\n}\n.button-submit-comment[data-v-5c8e4b38] {\n    margin-top:2vh;\n}\n", ""]);
+exports.push([module.i, "\n#container-coffeecomment[data-v-5c8e4b38] {\n  margin-top: 3vh;\n}\n.change-color[data-v-5c8e4b38] {\n  color: #7a2e20;\n}\n#button-comment[data-v-5c8e4b38] {\n  margin-top: 1.5vh;\n  margin-bottom: 3vh;\n}\n.login-alert[data-v-5c8e4b38] {\n  margin-top: 2vh;\n}\n.overlay-paper[data-v-5c8e4b38] {\n  position: fixed;\n  width: 100vw;\n  height: 100vh;\n  background-color: black;\n  opacity: 0.5;\n  top: 0;\n  z-index: 100;\n}\n#comment-form[data-v-5c8e4b38] {\n  position: fixed;\n  top: 20vh;\n  right: 20vw;\n  left: 20vw;\n  background-color: white;\n  z-index: 1000;\n}\n.button-submit-comment[data-v-5c8e4b38] {\n  margin-top: 2vh;\n}\n", ""]);
 
 // exports
 
@@ -7141,7 +7334,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#alert-delete[data-v-54ded044]{\n    margin-top:1vh;\n}\n", ""]);
+exports.push([module.i, "\n#alert-delete[data-v-54ded044] {\n  margin-top: 1vh;\n}\n", ""]);
 
 // exports
 
@@ -7160,7 +7353,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#introduction[data-v-1e3a2f05] {\n    background-color:#5a483c;\n}\n#coffee-svg[data-v-1e3a2f05]{\n    width:90%;\n    fill:#d5bca7;\n}\n#title[data-v-1e3a2f05] {\n    font-family:'Fredericka the Great',cursive;\n    color:#d5bca7;\n}\n#container-introduction[data-v-1e3a2f05]{\n    padding-bottom:2vh;\n    padding-top:2vh;\n}\n", ""]);
+exports.push([module.i, "\n#introduction[data-v-1e3a2f05] {\n  background-color: #5a483c;\n}\n#coffee-svg[data-v-1e3a2f05] {\n  width: 90%;\n  fill: #d5bca7;\n}\n#title[data-v-1e3a2f05] {\n  font-family: \"Fredericka the Great\", cursive;\n  color: #d5bca7;\n}\n#container-introduction[data-v-1e3a2f05] {\n  padding-bottom: 2vh;\n  padding-top: 2vh;\n}\n", ""]);
 
 // exports
 
@@ -7179,7 +7372,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#user-page-container[data-v-03e8df63] {\n    margin-top:0;\n    padding-top:0;\n}\n#greeting-user[data-v-03e8df63]{\n    color:#7a2e20;\n    margin-top:1vh;\n}\n#button-submit-coffee[data-v-03e8df63]{\n    margin-top:1vh;\n    margin-bottom:2vh;\n}\n#form-add-coffee[data-v-03e8df63]{\n    margin-top:3vh;\n}\n\n", ""]);
+exports.push([module.i, "\n#user-page-container[data-v-03e8df63] {\n  margin-top: 0;\n  padding-top: 0;\n}\n#greeting-user[data-v-03e8df63] {\n  color: #7a2e20;\n  margin-top: 1vh;\n}\n#button-submit-coffee[data-v-03e8df63] {\n  margin-top: 1vh;\n  margin-bottom: 2vh;\n}\n#form-add-coffee[data-v-03e8df63] {\n  margin-top: 3vh;\n}\n", ""]);
 
 // exports
 
@@ -56685,7 +56878,7 @@ var render = function() {
     { staticClass: "container", attrs: { id: "inside-container" } },
     [
       _c("h3", { staticClass: "text-center change-color" }, [
-        _vm._v("Plese, select coffee")
+        _vm._v("Please, select coffee")
       ]),
       _vm._v(" "),
       this.message != ""
@@ -56768,14 +56961,14 @@ var render = function() {
                   _c("span", { staticClass: "change-color" }, [
                     _vm._v("City:")
                   ]),
-                  _vm._v(" " + _vm._s(coffee.city))
+                  _vm._v("\n          " + _vm._s(coffee.city) + "\n        ")
                 ]),
                 _vm._v(" "),
                 _c("h5", [
                   _c("span", { staticClass: "change-color" }, [
                     _vm._v("Country:")
                   ]),
-                  _vm._v(" " + _vm._s(coffee.country))
+                  _vm._v("\n          " + _vm._s(coffee.country) + "\n        ")
                 ])
               ])
             ])
@@ -56871,9 +57064,10 @@ var render = function() {
               [
                 _c("metadata", [
                   _vm._v(
-                    " Svg Vector Icons : http://www.onlinewebfonts.com/icon "
+                    "Svg Vector Icons : http://www.onlinewebfonts.com/icon"
                   )
                 ]),
+                _vm._v(" "),
                 _c("g", [
                   _c(
                     "g",
@@ -56890,42 +57084,49 @@ var render = function() {
                             "M512,4072.8l-412-412l30.6-79.5c53-155,177.4-407.9,267.2-550.7c59.1-95.9,208-261.1,452.8-503.8c338.6-336.5,371.2-363,440.5-363c104,0,171.3,36.7,208,112.2c36.7,79.5,38.8,120.3,10.2,175.4c-32.6,57.1-4.1,46.9,83.6-32.6c110.1-97.9,199.9-97.9,297.8,0c65.3,65.3,71.4,81.6,63.2,161.1l-10.2,89.7l69.4-40.8c171.3-102,375.3,53,316.1,242.7c-20.4,65.3,28.6,22.4,369.2-316.1c381.4-379.4,395.7-391.6,477.3-391.6c157,0,263.1,150.9,201.9,289.6c-16.3,38.8-297.8,336.5-662.9,699.6c-348.8,346.7-634.3,638.4-634.3,646.5c0,10.2,97.9,16.3,216.2,16.3h216.2l69.3,69.3c57.1,57.1,69.3,85.7,69.3,153c0,46.9-14.3,112.2-30.6,144.8c-55.1,108.1-99.9,116.3-611.9,128.5c-414,8.2-495.6,16.3-693.4,63.2c-122.4,28.6-263.1,65.3-308,81.6l-83.6,28.6L512,4072.8z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
                             "M8963.8,4446.1c-32.6-12.2-157-42.8-275.3-73.4c-187.6-44.9-275.3-53-707.7-65.3l-495.6-12.2l-61.2-61.2c-114.2-114.2-102-289.6,26.5-381.4c55-38.8,85.6-44.9,273.3-40.8c116.2,2,210-2,210-10.2c0-8.2-297.8-314.1-662.9-679.2l-662.8-664.9v-87.7c0-161.1,165.2-257,312.1-183.6c24.5,12.2,206,181.5,401.8,377.3l356.9,354.9l-6.1-99.9c-6.1-79.5,2-108.1,40.8-153c65.3-77.5,201.9-95.9,279.4-36.7l55,40.8v-102c-2-89.7,6.1-108.1,65.3-161.1c102-91.8,210-77.5,334.5,38.8l57.1,51l-18.4-61.2c-40.8-144.8,55.1-271.3,208.1-271.3c79.6,0,93.8,10.2,438.5,352.8c436.5,432.4,520.1,550.7,707.7,999.4l59.2,138.7l-407.9,407.9c-222.3,222.3-420.1,405.9-436.5,403.8C9039.3,4466.5,8998.5,4456.3,8963.8,4446.1z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
                             "M5527.2,3224.4c0-562.9,14.3-530.3-199.8-428.3c-210.1,99.9-383.5,71.4-485.4-79.5c-67.3-97.9-67.3-252.9-2-350.8c49-75.5,197.8-161.1,275.4-161.1c26.5,0,110.1,28.5,187.6,61.2c77.5,34.7,163.2,61.2,189.7,61.2h51l-4.1-520.1l-2.1-520.1h528.3h528.2l-14.3-65.3c-8.1-36.7-36.7-110.1-63.2-163.2c-136.6-263.1,2-526.2,277.4-526.2c255,0,387.5,269.2,257,522.1c-28.6,57.1-55.1,130.5-59.2,163.2l-6.1,59.1l485.4,6.1l483.3,4.1v609.8v609.8h-79.6c-99.9,2-195.8,49-240.6,122.4c-18.4,30.6-36.7,59.2-40.8,63.2c-4.1,6.1-142.8-124.4-308-287.6c-346.7-344.7-401.8-375.3-565-314.1c-157,61.2-234.6,206-193.8,363c20.4,75.5,97.9,163.2,607.8,675.1l585.3,585.4H6622.5H5527.2V3224.4z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
                             "M2879.9,3108.1c511.9-514,585.3-597.6,599.6-664.9c42.8-240.7-193.8-442.6-412-350.8c-46.9,20.4-189.7,142.8-365.1,316.1l-285.5,285.5l-59.1-73.4c-65.3-81.6-132.6-114.2-240.7-114.2c-51,2-77.5-8.2-77.5-24.5c0-14.3-26.5-65.3-61.2-110.1l-61.2-85.7v-509.9v-509.9H2419h501.7l-12.2-55.1c-8.2-32.6-38.8-104-67.3-163.2c-128.5-259,12.2-516,285.5-516c118.3,0,214.2,65.3,275.3,183.6c59.2,118.3,57.1,167.2-16.3,322.2c-34.7,71.4-61.2,153-61.2,179.5v49h509.9h509.9v532.3v532.3l-65.3-14.3c-36.7-8.2-110.1-36.7-163.2-63.2c-191.7-95.9-397.7-36.7-483.4,140.7c-55.1,112.2-53,167.2,4.1,279.4c87.7,175.4,257,240.7,430.3,163.2c159.1-69.3,244.7-99.9,261.1-87.7c10.2,4.1,16.3,218.2,16.3,477.3v467.1H3320.4H2294.6L2879.9,3108.1z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
                             "M1896.8-991.4v-1056.5l569,569l569,569l112.2,10.2c220.3,18.4,371.2-144.8,330.4-358.9c-12.2-63.2-67.3-128.5-322.2-385.5c-169.3-171.3-303.9-314.1-297.8-318.2c4.1-4.1,34.7-22.4,65.3-42.8c69.4-42.9,144.8-199.9,130.5-271.3c-6.1-38.8,2-53,40.8-69.3c26.5-10.2,316.1-18.3,640.4-18.3h589.4v469.1v469.1h-51c-28.5,0-97.9-22.5-153-51c-263.1-132.6-534.4,8.1-534.4,275.3c0,265.1,254.9,401.8,520.1,277.4c59.2-28.6,130.5-57.1,163.2-63.2l55.1-14.3v532.3V63.1h-501.7h-499.7l14.3-44.9c6.1-26.5,36.7-95.8,63.2-155c114.2-244.7-6.1-485.4-254.9-509.9c-81.6-6.1-120.3,0-187.6,38.8C2782-508,2735.1-312.2,2841.1-106.2C2935,73.3,2963.5,63.1,2396.5,63.1h-499.7V-991.4z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
                             "M5545.6-134.7c-2-87.7-4.1-314.1-6.1-505.8c-2.1-405.9,4.1-395.7-208-297.8c-212.1,99.9-367.1,81.6-483.4-57.1c-144.8-173.4-46.9-450.8,183.6-509.9c97.9-26.5,161.1-16.3,295.7,51c53,26.5,124.4,48.9,159.1,48.9h61.2v-499.7v-499.7h618c599.6,0,618,2.1,703.6,44.9c79.6,42.8,85.6,53,85.6,128.5c0,77.5,79.6,234.6,118.3,234.6c8.2,0,28.6,10.2,44.9,20.4c24.5,14.3-30.6,79.5-269.2,320.2c-238.6,240.7-301.9,318.2-320.2,383.4c-61.2,230.5,146.9,436.5,375.3,375.3c67.3-18.3,167.3-108.1,567-503.7l483.3-481.3v952.5V22.3H7475c-550.7,0-522.1,14.3-418.1-193.8c73.4-148.9,77.5-254.9,14.3-367.1c-130.5-230.5-454.8-226.4-579.2,8.1c-63.2,118.3-59.2,195.8,14.3,352.9c102,216.2,136.7,199.9-448.7,199.9h-509.9L5545.6-134.7z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
                             "M2423-1644l-669-669v189.7c0,118.3-10.2,216.2-28.6,259c-34.7,81.6-138.7,153-226.4,153c-32.6,0-91.8-18.3-128.5-40.8c-112.2-69.3-126.5-132.6-126.5-579.2c0-418.1-18.4-571.1-114.2-928l-53-191.7l405.9-405.9c222.3-222.3,418.1-403.8,434.4-403.8c44.9,0,412,169.3,579.2,267.2c181.5,108.1,860.7,768.9,887.2,864.8c22.4,83.6-6.1,173.4-73.4,232.5c-44.9,38.7-71.4,44.9-153,38.7l-97.9-10.2l71.4,79.6c55.1,61.2,71.4,95.8,71.4,157c0,146.9-142.8,257-271.3,208.1l-53-20.4l38.8,65.2c61.2,100,53,208-20.4,283.5c-57.1,57.1-71.4,61.2-165.2,53l-104-10.2l367.1,369.2c204,201.9,377.3,393.6,389.6,424.2c48.9,134.6-59.1,281.4-208,281.4C3092-977.1,3081.8-987.3,2423-1644z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
@@ -56951,7 +57152,7 @@ var render = function() {
             "row justify-content-center justify-content-md-center justify-content-xl-center"
         },
         [
-          _c("div", { staticClass: "col-4  col-md-3 col-xl-2" }, [
+          _c("div", { staticClass: "col-4 col-md-3 col-xl-2" }, [
             this.userLoggedin
               ? _c(
                   "a",
@@ -57015,14 +57216,27 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "col-12 col-xl-10  order-xl-2 align-self-center"
+                  staticClass: "col-12 col-xl-10 order-xl-2 align-self-center"
                 },
                 [
-                  _c("h5", [_vm._m(3, true), _vm._v(_vm._s(coffee.name))]),
+                  _c("h5", [
+                    _vm._m(3, true),
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(coffee.name) +
+                        "\n            "
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("h5", [
                     _vm._m(4, true),
-                    _vm._v(_vm._s(coffee.city) + "," + _vm._s(coffee.country))
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(coffee.city) +
+                        "," +
+                        _vm._s(coffee.country) +
+                        "\n            "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("Showstar", { attrs: { coffeeId: coffee.id } })
@@ -57061,7 +57275,11 @@ var render = function() {
         }),
         0
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6)
   ])
 }
 var staticRenderFns = [
@@ -57109,7 +57327,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "change-color" }, [
-      _c("strong", [_vm._v("Name: ")])
+      _c("strong", [_vm._v("Name:")])
     ])
   },
   function() {
@@ -57117,7 +57335,43 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "change-color" }, [
-      _c("strong", [_vm._v("Location: ")])
+      _c("strong", [_vm._v("Location:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _vm._v("\n    Icon made from\n    "),
+      _c("a", { attrs: { href: "http://www.onlinewebfonts.com/icon" } }, [
+        _vm._v("Icon Fonts")
+      ]),
+      _vm._v(" is licensed by CC BY 3.0\n  ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _vm._v("\n    Icons made by\n    "),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.flaticon.com/authors/freepik",
+            title: "Freepik"
+          }
+        },
+        [_vm._v("Freepik")]
+      ),
+      _vm._v(" from\n    "),
+      _c(
+        "a",
+        { attrs: { href: "https://www.flaticon.com/", title: "Flaticon" } },
+        [_vm._v("www.flaticon.com")]
+      )
     ])
   }
 ]
@@ -57163,12 +57417,19 @@ var render = function() {
           { staticClass: "row justify-content-center align-items-center" },
           [
             _c("div", { staticClass: "col-10 col-xl-4 col-md-4" }, [
-              _c("h5", [_vm._m(0), _vm._v(_vm._s(_vm.coffee.name))]),
+              _c("h5", [
+                _vm._m(0),
+                _vm._v("\n          " + _vm._s(_vm.coffee.name) + "\n        ")
+              ]),
               _vm._v(" "),
               _c("h5", [
                 _vm._m(1),
                 _vm._v(
-                  _vm._s(_vm.coffee.city) + "," + _vm._s(_vm.coffee.country)
+                  "\n          " +
+                    _vm._s(_vm.coffee.city) +
+                    "," +
+                    _vm._s(_vm.coffee.country) +
+                    "\n        "
                 )
               ])
             ]),
@@ -57366,7 +57627,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "change-color" }, [
-      _c("strong", [_vm._v("Name: ")])
+      _c("strong", [_vm._v("Name:")])
     ])
   },
   function() {
@@ -57374,7 +57635,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "change-color" }, [
-      _c("strong", [_vm._v("Location: ")])
+      _c("strong", [_vm._v("Location:")])
     ])
   },
   function() {
@@ -57417,8 +57678,8 @@ var render = function() {
           attrs: { id: "row-comment" }
         },
         [
-          _c("div", { staticClass: "col-7 col-xl-2  " }, [
-            _c("h5", [_vm._v(" " + _vm._s(_vm.comment.nickname))])
+          _c("div", { staticClass: "col-7 col-xl-2" }, [
+            _c("h5", [_vm._v(_vm._s(_vm.comment.nickname))])
           ]),
           _vm._v(" "),
           _c(
@@ -57463,7 +57724,7 @@ var render = function() {
                   },
                   [
                     _c("i", { staticClass: "fas fa-trash-alt" }),
-                    _vm._v(" Delete")
+                    _vm._v(" Delete\n        ")
                   ]
                 )
               : _vm._e()
@@ -57479,7 +57740,7 @@ var render = function() {
                 },
                 [
                   _c("p", [
-                    _vm._v("Are you sure you want to delete this comment? ")
+                    _vm._v("Are you sure you want to delete this comment?")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -57582,20 +57843,35 @@ var render = function() {
                           }
                         })
                       ]),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g"),
+                      _vm._v(" "),
                       _c("g")
                     ]
                   )
@@ -57617,7 +57893,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "col-9 col-md-7 col-xl-6  align-self-center" },
+      { staticClass: "col-9 col-md-7 col-xl-6 align-self-center" },
       [_c("h2", { attrs: { id: "title" } }, [_vm._v("Coffee Lovers")])]
     )
   }
@@ -70252,10 +70528,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Coffeecollection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Coffeecollection.vue?vue&type=script&lang=js& */ "./resources/js/components/Coffeecollection.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _Coffeecollection_vue_vue_type_style_index_0_id_07ffe656_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Coffeecollection.vue?vue&type=style&index=0&id=07ffe656&scoped=true&lang=css& */ "./resources/js/components/Coffeecollection.vue?vue&type=style&index=0&id=07ffe656&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-/* harmony import */ var _Coffeecollection_vue_vue_type_custom_index_0_blockType_div__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Coffeecollection.vue?vue&type=custom&index=0&blockType=div */ "./resources/js/components/Coffeecollection.vue?vue&type=custom&index=0&blockType=div");
-/* harmony import */ var _Coffeecollection_vue_vue_type_custom_index_0_blockType_div__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Coffeecollection_vue_vue_type_custom_index_0_blockType_div__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Coffeecollection_vue_vue_type_custom_index_1_blockType_div__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Coffeecollection.vue?vue&type=custom&index=1&blockType=div */ "./resources/js/components/Coffeecollection.vue?vue&type=custom&index=1&blockType=div");
-/* harmony import */ var _Coffeecollection_vue_vue_type_custom_index_1_blockType_div__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_Coffeecollection_vue_vue_type_custom_index_1_blockType_div__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -70275,38 +70547,10 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-/* custom blocks */
-
-if (typeof _Coffeecollection_vue_vue_type_custom_index_0_blockType_div__WEBPACK_IMPORTED_MODULE_4___default.a === 'function') _Coffeecollection_vue_vue_type_custom_index_0_blockType_div__WEBPACK_IMPORTED_MODULE_4___default()(component)
-
-if (typeof _Coffeecollection_vue_vue_type_custom_index_1_blockType_div__WEBPACK_IMPORTED_MODULE_5___default.a === 'function') _Coffeecollection_vue_vue_type_custom_index_1_blockType_div__WEBPACK_IMPORTED_MODULE_5___default()(component)
-
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/Coffeecollection.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Coffeecollection.vue?vue&type=custom&index=0&blockType=div":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/Coffeecollection.vue?vue&type=custom&index=0&blockType=div ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Coffeecollection.vue?vue&type=custom&index=1&blockType=div":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/Coffeecollection.vue?vue&type=custom&index=1&blockType=div ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 

@@ -25,9 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->id==1){
+        if (Auth::user()->id == 1) {
             return view('adminView');
-        } else if(Auth::check()) {
+        } else if (Auth::check()) {
             return view('userView');
         }
         return view('home');

@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Coffee, review, lovers, share, opinions, reviewer">
+    <meta name="description" content="A social media to share opinion about different coffees">
+    <meta name="author" content="Isabela">
+    <link rel="icon" href="images/Coffeeicon.png" type="image/gif" sizes="16x16">
+    <title>Coffee Lovers</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

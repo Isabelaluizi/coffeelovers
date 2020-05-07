@@ -16,20 +16,15 @@ class User extends Authenticatable
      * @var array
      */
 
-    public function coffees() {
-        return $this->hasMany('App\Coffee','user_id','id');
+    public function coffees()
+    {
+        return $this->hasMany('App\Coffee', 'user_id', 'id');
     }
 
-    public function comments() {
-        return $this->hasMany('App\Comment','user_id','id');
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'user_id', 'id');
     }
-
-
-
-
-
-
-
 
     protected $fillable = [
         'name', 'email', 'password',
