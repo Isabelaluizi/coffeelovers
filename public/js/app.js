@@ -2197,7 +2197,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Comment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comment */ "./resources/js/components/Comment.vue");
+/* harmony import */ var _Comment_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comment.vue */ "./resources/js/components/Comment.vue");
+/* harmony import */ var _Showstar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Showstar.vue */ "./resources/js/components/Showstar.vue");
+//
 //
 //
 //
@@ -2278,10 +2280,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Coffeecomment",
   components: {
-    Comment: _Comment__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Comment: _Comment_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Showstar: _Showstar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     coffee: {
@@ -57416,23 +57420,32 @@ var render = function() {
           "div",
           { staticClass: "row justify-content-center align-items-center" },
           [
-            _c("div", { staticClass: "col-10 col-xl-4 col-md-4" }, [
-              _c("h5", [
-                _vm._m(0),
-                _vm._v("\n          " + _vm._s(_vm.coffee.name) + "\n        ")
-              ]),
-              _vm._v(" "),
-              _c("h5", [
-                _vm._m(1),
-                _vm._v(
-                  "\n          " +
-                    _vm._s(_vm.coffee.city) +
-                    "," +
-                    _vm._s(_vm.coffee.country) +
-                    "\n        "
-                )
-              ])
-            ]),
+            _c(
+              "div",
+              { staticClass: "col-10 col-xl-4 col-md-4" },
+              [
+                _c("h5", [
+                  _vm._m(0),
+                  _vm._v(
+                    "\n          " + _vm._s(_vm.coffee.name) + "\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h5", [
+                  _vm._m(1),
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm.coffee.city) +
+                      "," +
+                      _vm._s(_vm.coffee.country) +
+                      "\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("Showstar", { attrs: { coffeeId: _vm.coffee.id } })
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "col-10 col-xl-2 col-md-2" }, [
               _c("img", {

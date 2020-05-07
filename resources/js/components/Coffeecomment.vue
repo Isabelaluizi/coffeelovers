@@ -16,6 +16,7 @@
             </span>
             {{coffee.city}},{{coffee.country}}
           </h5>
+          <Showstar :coffeeId="coffee.id" />
         </div>
         <div class="col-10 col-xl-2 col-md-2">
           <img :src="'/storage/' + coffee.picture" class="rounded mx-auto d-block img-fluid" />
@@ -78,11 +79,13 @@
 </template>
 
 <script>
-import Comment from "./Comment";
+import Comment from "./Comment.vue";
+import Showstar from "./Showstar.vue";
 export default {
   name: "Coffeecomment",
   components: {
-    Comment
+    Comment,
+    Showstar
   },
   props: {
     coffee: {
