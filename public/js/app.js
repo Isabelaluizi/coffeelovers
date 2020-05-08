@@ -2279,6 +2279,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -57526,6 +57529,19 @@ var render = function() {
                 attrs: { id: "comment-form" }
               },
               [
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-1 offset-11",
+                    on: {
+                      click: function($event) {
+                        return _vm.changenotComment()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "far fa-window-close" })]
+                ),
+                _vm._v(" "),
                 _vm._m(2),
                 _vm._v(" "),
                 _c("p", [_vm._v(_vm._s(this.userMessage))]),

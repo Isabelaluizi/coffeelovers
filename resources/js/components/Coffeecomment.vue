@@ -41,6 +41,9 @@
         id="comment-form"
         class="shadow-lg p-3 mb-5 bg-white rounded row justify-content-center justify-content-xl-center"
       >
+        <div class="col-1 offset-11" @click="changenotComment()">
+          <i class="far fa-window-close"></i>
+        </div>
         <h5 class="change-color text-center">
           <strong>
             <u>Comment</u>
